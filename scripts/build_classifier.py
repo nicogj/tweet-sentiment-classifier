@@ -12,6 +12,3 @@ model = ClassificationModel('bert', 'bert-base-cased', use_cuda=False, args={'ov
 
 # Train the model
 model.train_model(train_df, output_dir = 'models')
-
-# Evaluate the model
-result, model_outputs, wrong_predictions = model.eval_model(test, verbose=True)
