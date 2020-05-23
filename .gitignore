@@ -4,6 +4,7 @@ data/**/*.csv
 data/**/*.npy
 cache_dir/
 runs/
+models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

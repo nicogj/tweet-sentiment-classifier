@@ -6,6 +6,14 @@ import argparse
 
 from utils import split_train_test
 
+args={
+    'reprocess_input_data': True,
+    'overwrite_output_dir': True,
+    "config": {
+        "output_hidden_states": True
+    }
+}
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
@@ -18,7 +26,7 @@ if __name__ == '__main__':
     train_df = pd.read_csv('data/train.tsv', sep='\t', encoding='latin')
 
     # Create a ClassificationModel
-    model = ClassificationModel('bert', 'bert-base-cased', use_cuda=False, args={'overwrite_output_dir': True})
+    model = ClassificationModel('bert', 'bert-base-cased', args=args, use_cuda = False)
 
     # Train the model
-    model.train_model(train_df, output_dir = 'models')
+    model.train_model(train_df)
