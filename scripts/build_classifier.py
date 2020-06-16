@@ -6,7 +6,7 @@ import argparse
 
 from utils import split_train_test
 
-args={
+model_args={
     'reprocess_input_data': True,
     'overwrite_output_dir': True,
     "config": {
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     train_df = pd.read_csv('data/train.tsv', sep='\t', encoding='latin')
 
     # Create a ClassificationModel
-    model = ClassificationModel('bert', 'bert-base-cased', args=args, use_cuda = False)
+    model = ClassificationModel('bert', 'bert-base-cased', args=model_args, use_cuda = False)
 
     # Train the model
     model.train_model(train_df)
