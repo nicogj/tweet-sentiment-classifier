@@ -15,7 +15,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # Load in model
-    model = ClassificationModel('bert', args.modelpath, use_cuda=False)
+    model = ClassificationModel('distilbert', args.modelpath, use_cuda=False)
 
     # Load in Test
     test_df = pd.read_csv('data/test.tsv', sep='\t', encoding='latin', nrows=args.evalrows)
