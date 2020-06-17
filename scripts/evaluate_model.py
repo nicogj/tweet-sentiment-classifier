@@ -21,7 +21,7 @@ if __name__ == '__main__':
     test_df = pd.read_csv('data/test.tsv', sep='\t', encoding='latin', nrows=args.evalrows)
 
     # Evaluate the model
-    result, model_outputs, wrong_predictions = model.eval_model(test_df, acc=sklearn.metrics.accuracy_score)
+    results, model_outputs, wrong_predictions = model.eval_model(test_df, acc=sklearn.metrics.accuracy_score)
     print(results)
 
     # Predict

@@ -26,7 +26,7 @@ if __name__ == '__main__':
     train_df = pd.read_csv('data/train.tsv', sep='\t', encoding='latin')
 
     # Create a ClassificationModel
-    model = ClassificationModel('bert', 'bert-base-cased', args=model_args, use_cuda = False)
+    model = ClassificationModel('distilbert', 'distilbert-base-multilingual-cased', args=model_args, use_cuda = False)
 
     # Train the model
     model.train_model(train_df)
