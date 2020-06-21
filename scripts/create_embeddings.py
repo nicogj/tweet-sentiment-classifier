@@ -14,10 +14,13 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', default = 100, type = int, help='batch size')
     args = parser.parse_args()
 
+    print("Reading in data")
     corpus = pd.read_csv('data/labeled_data.tsv', sep='\t')['text'].values
 
+    print("Creating Embeddings")
     embeddings = model.encode(corpus, show_progress_bar=True, batch_size=args.batch_size)
 
+    print("Exporting")
     np.save('data/labeled_embeddings.npy', np.array(embeddings))
 
-    print("Done !".format(args.date))
+    print("Done !")
