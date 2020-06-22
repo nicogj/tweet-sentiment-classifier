@@ -1,5 +1,8 @@
+# python3 scripts/data_setup.py data/training_1600000_processed_noemoticon.csv
+
 import pandas as pd
 import argparse
+from tqdm.auto import tqdm
 
 from utils import clean_for_content
 
@@ -10,8 +13,9 @@ def readin_data(path):
         df = df[[0,5]]
         df.columns = ['label', 'text']
         df['label'] = [0 if x==0 else 1 for x in df['label']]
+        df['lang'] = 'en'
 
-    df['text'] = [clean_for_content(string, 'en') for string in df['text'].values]
+    df['text'] = [clean_for_content(text, lang) for text, lang in tqdm(zip(df['text'], df['lang']), total=df.shape[0])]
 
     df = df[df['text']!=''].reset_index(drop=True)
 
