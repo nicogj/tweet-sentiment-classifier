@@ -4,7 +4,7 @@ import numpy as np
 
 random_state = 123
 
-def clean_for_content(string):
+def clean_for_content(string, lang):
 
     string = string.lower()
 
@@ -15,9 +15,11 @@ def clean_for_content(string):
     string = re.sub(r'\&lt;', ' < ', string)
     string = re.sub(r'<\s?3', ' ❤ ', string)
     string = re.sub(r'\@\s', ' at ', string)
-    string = re.sub(r'(\&(amp)?|amp;)', ' and ', string)
-    string = re.sub(r'(\bw\/?\b)', ' with ', string)
-    string = re.sub(r'\brn\b', ' right now ', string)
+
+    if lang == 'en':
+        string = re.sub(r'(\&(amp)?|amp;)', ' and ', string)
+        string = re.sub(r'(\bw\/?\b)', ' with ', string)
+        string = re.sub(r'\brn\b', ' right now ', string)
 
     string = re.sub(r'\s+', ' ', string).strip()
 
