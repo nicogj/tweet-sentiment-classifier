@@ -8,8 +8,8 @@ def readin_data(path):
     if path == 'data/training_1600000_processed_noemoticon.csv':
         df = pd.read_csv('data/training_1600000_processed_noemoticon.csv', encoding='latin', header=None)
         df = df[[0,5]]
-        df.columns = ['labels', 'text']
-        df['labels'] = [0 if x==0 else 1 for x in df['labels']]
+        df.columns = ['label', 'text']
+        df['label'] = [0 if x==0 else 1 for x in df['label']]
 
     df['text'] = [clean_for_content(string, 'en') for string in df['text'].values]
 

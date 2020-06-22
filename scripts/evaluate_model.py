@@ -11,14 +11,14 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('modelpath', type=str, help='Where is the model you want to evaluate?')
-    parser.add_argument('--evalrows', type=int, default=1000, help='How many rows do you want to evaluate on?')
     args = parser.parse_args()
 
     # Load in model
     model = ClassificationModel('distilbert', args.modelpath, use_cuda=False)
 
     # Load in Test
-    test_df = pd.read_csv('data/test.tsv', sep='\t', encoding='latin', nrows=args.evalrows)
+    test_df = pd.read_csv('data/test.tsv', sep='\t', encoding='latin')
+    test_embedding = np.load('data/test_embeddings.npy')
 
     # Evaluate the model
     results, model_outputs, wrong_predictions = model.eval_model(test_df, acc=sklearn.metrics.accuracy_score)

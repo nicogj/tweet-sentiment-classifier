@@ -1,18 +1,13 @@
 # python3 scripts/build_classifier.py --train_size 0.50
 
-from simpletransformers.classification import ClassificationModel
 import pandas as pd
 import argparse
+from sklearn.linear_model import LogisticRegression
+from sklearn.externals import joblib
 
 from utils import split_train_test
 
-model_args={
-    'reprocess_input_data': True,
-    'overwrite_output_dir': True,
-    "config": {
-        "output_hidden_states": True
-    }
-}
+random_state = 123
 
 if __name__ == '__main__':
 
@@ -23,10 +18,14 @@ if __name__ == '__main__':
 
     # Generate Training set
     split_train_test(train_size = args.train_size)
+
     train_df = pd.read_csv('data/train.tsv', sep='\t', encoding='latin')
+    train_embedding = np.load('data/train_embeddings.npy')
 
     # Create a ClassificationModel
-    model = ClassificationModel('distilbert', 'distilbert-base-multilingual-cased', args=model_args, use_cuda = False)
+    clf_model = LogisticRegression(random_state=123)
 
     # Train the model
-    model.train_model(train_df)
+    clf_model.fit(train_embedding, train_df['label'])
+
+    joblib.dump(clf_model, 'models/clf_logreg.pkl')
