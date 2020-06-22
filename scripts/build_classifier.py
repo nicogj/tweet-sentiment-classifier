@@ -1,6 +1,7 @@
 # python3 scripts/build_classifier.py --train_size 0.50
 
 import pandas as pd
+import numpy as np
 import argparse
 from sklearn.linear_model import LogisticRegression
 from sklearn.externals import joblib
