@@ -62,14 +62,14 @@ if __name__ == '__main__':
 
     # Create and Train Model
     train_df = pd.read_csv('data/train.tsv', sep='\t', encoding='latin')
-    train_embedding = np.load('data/train_embeddings.npy')
+    train_embeddings = np.load('data/train_embeddings.npy')
 
     clf_model = train_model(train_df, train_embeddings, args)
     joblib.dump(clf_model, 'models/clf_logreg.pkl')
 
     # Test Model:
     test_df = pd.read_csv('data/test.tsv', sep='\t', encoding='latin')
-    test_embedding = np.load('data/test_embeddings.npy')
+    test_embeddings = np.load('data/test_embeddings.npy')
 
     test_model(clf_model, test_df, test_embeddings)
 
